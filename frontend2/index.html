@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Students</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #1a1a2e, #16213e, #0f3460);
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+        .form-container {
+            flex: 1;
+            max-width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .course-info {
+            flex: 2;
+            margin-left: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: left;
+            font-size: 22px;
+            color: #00ffcc;
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button {
+            background: #ff5722;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Artificial Intelligence Courses</h1>
+    <div class="container">
+        <div class="form-container">
+            <form id="studentForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="course-info">
+            <h2>Artificial Intelligence Course Overview</h2>
+            <p>This course provides an in-depth understanding of Artificial Intelligence, covering:</p>
+            <ul>
+                <li>✔ Introduction to AI and its real-world applications</li>
+                <li>✔ Machine Learning: Supervised, Unsupervised, and Reinforcement Learning</li>
+                <li>✔ Deep Learning: Neural Networks, CNNs, RNNs, and Transformers</li>
+                <li>✔ Natural Language Processing (NLP) and Speech Recognition</li>
+                <li>✔ Computer Vision and Image Processing</li>
+                <li>✔ AI Ethics, Bias, and Responsible AI Development</li>
+                <li>✔ Building AI-Powered Chatbots and Virtual Assistants</li>
+                <li>✔ Hands-on projects using Python, TensorFlow, and PyTorch</li>
+                <li>✔ Deploying AI models in production with cloud technologies</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+
+            fetch('http://44.220.136.33:3000/api2', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, address }),
+            })
+            .then(response => response.text())
+            .then(data => alert(data)) // Display the response message
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

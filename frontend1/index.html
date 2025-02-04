@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Student</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #1a1a2e, #16213e, #0f3460);
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+        .course-info {
+            flex: 2;
+            margin-right: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: left;
+            font-size: 22px;
+            color: #00ffcc;
+        }
+        .form-container {
+            flex: 1;
+            max-width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button {
+            background: #ff5722;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>DevOps Course</h1>
+    <div class="container">
+        <div class="course-info">
+            <h2>DevOps Course Overview</h2>
+            <p>This course provides an in-depth understanding of DevOps, covering:</p>
+            <ul>
+                <li> Introduction to DevOps and its principles</li>
+                <li> Continuous Integration and Continuous Deployment (CI/CD)</li>
+                <li> Infrastructure as Code (IaC) with Terraform and Ansible</li>
+                <li> Docker and Kubernetes for container orchestration</li>
+                <li> Cloud services (AWS, Azure, GCP) for DevOps</li>
+                <li> Monitoring and Logging using Prometheus and Grafana</li>
+                <li> Security and Compliance in DevOps</li>
+                <li> Automation and Scripting with Python and Bash</li>
+                <li> Hands-on projects and real-world applications</li>
+            </ul>
+        </div>
+        <div class="form-container">
+            <form id="studentForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            fetch('http://54.164.40.17:3000/api1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, phone, address }),
+            })
+            .then(response => response.text())
+            .then(data => alert(data)) // Display the response message
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

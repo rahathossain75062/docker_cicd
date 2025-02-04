@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <table id="studentTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th> 
+                <th>Phone</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Student data will be populated here -->
+        </tbody>
+    </table>
+<script>
+    fetch('http://54.164.40.17:3000/students')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#studentTable tbody');
+            data.data.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name || 'N/A'}</td>
+                    <td>${student.address && student.address !== 'undefined' ? student.address : 'N/A'}</td>
+                    <td>${student.email && student.email !== 'undefined' ? student.email : 'N/A'}</td>
+                    <td>${student.phone && student.phone !== 'undefined' ? student.phone : 'N/A'}</td>
+                    <td>${student.course || 'N/A'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+
+</body>
+</html>
